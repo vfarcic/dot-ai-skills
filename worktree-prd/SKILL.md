@@ -41,37 +41,24 @@ Convert the PRD title to a branch-friendly name:
 - "PRD #290: Skills Distribution System" → `prd-290-skills-distribution`
 - "PRD #264: GitOps Tool ArgoCD Integration" → `prd-264-gitops-argocd-integration`
 
-### Step 4: Check for Existing Worktree/Branch
+### Step 4: Create the Worktree
 
-Verify the branch and worktree don't already exist:
+Run the `create-worktree.sh` script from this skill's directory:
 ```bash
-git branch --list [branch-name]
-git worktree list | grep [branch-name]
+.claude/skills/worktree-prd/create-worktree.sh [branch-name]
 ```
 
-If they exist, inform the user and ask how to proceed.
+The script will:
+- Check if the branch or worktree already exists (exits with error if so)
+- Get the repository name dynamically
+- Create the worktree at `../${repo_name}-${branch-name}`
+- Output the path and instructions for the user
 
-### Step 5: Create the Worktree
-
-Create the worktree with the descriptive branch name:
-```bash
-git worktree add ../dot-ai-[branch-name] -b [branch-name] main
-```
-
-### Step 6: Confirm and Guide
-
-Show the user:
-1. The worktree path created
-2. The branch name
-3. Instructions to start working:
-   ```
-   To continue work on PRD [number]:
-   cd ../dot-ai-[branch-name]
-   ```
+If the script fails due to existing branch/worktree, inform the user and ask how to proceed.
 
 ## Guidelines
 
 - **Descriptive names**: Branch names should describe the feature, not just the PRD number
-- **Consistent format**: Always prefix worktree directory with `dot-ai-`
+- **Consistent format**: Always prefix worktree directory with the repository name
 - **Base on main**: Always branch from `main` for new feature work
 - **Clean names**: Keep branch names concise but descriptive
