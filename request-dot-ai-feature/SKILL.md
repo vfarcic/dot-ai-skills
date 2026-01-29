@@ -26,18 +26,19 @@ Write a feature request to a file in the target dot-ai project's tmp directory. 
 ## Process
 
 1. Determine the target project from the user's request
-2. **Delete any existing feature-request.md** in the target project's tmp directory (so the diff only shows new content)
-3. Write the feature request to: `../[target-project]/tmp/feature-request.md`
-4. Tell the user to open the target project and run `/process-feature-request`
+2. Determine the current project name from the directory name: `basename $(git rev-parse --show-toplevel)`
+3. **Delete any existing feature-request.md** in the target project's tmp directory (so the diff only shows new content)
+4. Write the feature request to: `../[target-project]/tmp/feature-request.md`
+5. Tell the user to open the target project and run `/process-feature-request`
 
 ## File Format
 
-Write the feature request file with this content:
+Write the feature request file with this content (replace `[CURRENT_PROJECT]` with the actual project name from step 2):
 
 ```markdown
 # Feature Request from [CURRENT_PROJECT]
 
-**Requesting project directory:** ../[current-project]
+**Requesting project directory:** ../[CURRENT_PROJECT]
 
 ## What We Need
 
@@ -61,7 +62,7 @@ You're the expert on this codebase. Feel free to implement this differently if t
 
 After implementing this feature, write a response file to help the requesting project integrate:
 
-1. Write to: `../[requesting-project]/tmp/feature-response.md`
+1. Write to: `../[CURRENT_PROJECT]/tmp/feature-response.md`
 2. Include: what was implemented, how to use it (API signatures, endpoints, types), and any usage examples
 ```
 
