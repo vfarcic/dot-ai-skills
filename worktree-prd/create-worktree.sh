@@ -38,6 +38,9 @@ fi
 # Create the worktree
 git worktree add "${worktree_path}" -b "${branch_name}" main
 
+# Initialize submodules in the new worktree
+(cd "${worktree_path}" && git submodule update --init --recursive)
+
 echo ""
 echo "Worktree created successfully:"
 echo "  Path:   ${worktree_path}"

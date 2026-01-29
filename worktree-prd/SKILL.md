@@ -52,6 +52,7 @@ The script will:
 - Check if the branch or worktree already exists (exits with error if so)
 - Get the repository name dynamically
 - Create the worktree at `../${repo_name}-${branch-name}`
+- Initialize submodules in the new worktree
 - Output the path and instructions for the user
 
 If the script fails due to existing branch/worktree, inform the user and ask how to proceed.
